@@ -1,0 +1,11 @@
+# Computer Systam
+1.2.1.1 INTEGER R 1357677
+1.2.2.1 DisplayString R "Gestão"
+1.2.2.2 DisplayString RW boas
+# 2ºgrupo (Interface Table)
+1.3.1.1 INTEGER R 2
+1.3.2.1 INTEGER R 1
+1.3.3.1 INTEGER RW 1
+1.3.4.1 INTEGER RW 6
+1.3.4.2 INTEGER RW 7
+1.3.4.3 INTEGER R 3
