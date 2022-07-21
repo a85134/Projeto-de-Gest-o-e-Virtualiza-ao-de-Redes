@@ -1,6 +1,9 @@
 from distutils.log import error
 import socket
 import _thread
+from cryptography.fernet import Fernet
+ 
+
  
 HOST = '127.0.0.1'      # Endereco IP do Servidor
 PORT = 5000   # Porta que o Servidor está
@@ -133,6 +136,7 @@ def conectado(con, cliente):
     while True:
         # Recebendo as mensagens através da conexão
         msg = con.recv(1024)
+        key=con.recv(1024)
         if not msg:
             break
  
@@ -141,11 +145,18 @@ def conectado(con, cliente):
 
         
         linha=lerlinhas()
-        msg= msg.decode('utf-8')
-        mensagem= msg.split(" ")
+
+        fernet = Fernet(key)
+
+
+        dectex = fernet.decrypt(str(msg).decode())
+        msg1= dectex.decode('utf-8')
+        mensagem= msg1.split(" ")
         resultado_mib =comando(mensagem)
 
-        con.send(str(resultado_mib).encode())
+        enctex = fernet.encrypt(resultado_mib.encode())
+
+        con.send(str(enctex.encode()))
         
         
  

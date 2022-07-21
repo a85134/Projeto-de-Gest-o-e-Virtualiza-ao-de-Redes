@@ -1,6 +1,7 @@
 # GVR
 
-instruções correr o server
+instruções
+ correr o server
 
 depois o cliente
  depois basta introduzir os comandos snmpget p l 1.2.2.2

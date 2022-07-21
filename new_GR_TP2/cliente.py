@@ -1,4 +1,5 @@
 import socket
+from cryptography.fernet import Fernet
 
 HOST = '127.0.0.1'     # Endereço IP do Servidor
 
@@ -25,13 +26,19 @@ mensagem = input()
 
 while mensagem != '\x18':
 
-   tcp.send(str(mensagem).encode())
+   key = Fernet.generate_key()
+   fernet = Fernet(key)
+   enctex = fernet.encrypt(mensagem.encode())
+   
+   tcp.send((enctex))
+   tcp.send((key))
    msg=tcp.recv(1024)
-   mensagem= msg.decode('utf-8')
+   dectex = fernet.decrypt(msg.decode())
+   mensagem= dectex.decode('utf-8')
    print(mensagem)
 
    mensagem = input()
 
 # Fechando o Socket
 
-tcp.close()
+tcp.close() 
