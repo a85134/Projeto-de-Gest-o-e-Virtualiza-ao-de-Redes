@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+    auth:
+        image: vr2_auth:latest
+        container_name: auth
+        ports:
+            - '3003:3003'
+        expose: 
+            - '3002'
+        networks: 
+            - auth_http
+    http:
+        depends_on:
+            - auth
+        image: vr2_http:latest
+        container_name: http
+        ports:
+            - '4004:4004'
+        expose: 
+            - '4004'
+        volumes:
+            #Criar o volume para persistência
+            - vr2-http:/server/data
+        networks: 
+            - auth_http
+volumes:
+    vr2-http:
+        driver: local
+networks: 
+    auth_http:
