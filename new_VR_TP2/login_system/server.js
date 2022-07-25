@@ -108,10 +108,7 @@ app.get("/register", (req, res) => {
   res.render("register", { titl: "Login System" });
 });
 
-const credential = {
-  email: "camila@gmail.com",
-  password: "123",
-};
+
 
 //login user
 
